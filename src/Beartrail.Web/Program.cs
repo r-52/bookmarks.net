@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddCustomConfig();
 
+builder.Services.AddInfrastructure(builder.Configuration);
+
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(options =>
 {

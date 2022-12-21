@@ -1,0 +1,9 @@
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using Beartrail.Infrastructure.Identity;
+global using Beartrail.Infrastructure.Database;
+global using Beartrail.Application.Interfaces.Database;
+global using Microsoft.EntityFrameworkCore;
+global using System.Reflection;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Configuration;
