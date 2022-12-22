@@ -9,11 +9,13 @@ public static class StartupInfrastructure
                 builder => builder.MigrationsAssembly(typeof(ApplicationDataContext).Assembly.FullName)));
         services.AddScoped<IApplicationDataContext>(provider => provider.GetRequiredService<ApplicationDataContext>());
 
-
+        services.AddScoped<IApplicationDataContextSeeder, ApplicationDataContextSeeder>();
         services
             .AddIdentityCore<BearUser>()
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDataContext>();
+
+        services.AddScoped<IJwtTokenGeneratorService, JwtTokenGeneratorService>();
 
         return services;
     }

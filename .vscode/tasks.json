@@ -36,6 +36,32 @@
                 "${workspaceFolder}/src/Beartrail.Web/Beartrail.Web.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "migration",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "ef",
+                "--startup-project",
+                "${workspaceFolder}/src/Beartrail.Web/Beartrail.Web.csproj",
+                "migrations",
+                "add",
+                "${input:nameOfMigration}",
+                "--output-dir",
+                "${workspaceFolder}/src/Beartrail.Infrastructure/Database/Migrations",
+                "-p",
+                "${workspaceFolder}/src/Beartrail.Infrastructure/Beartrail.Infrastructure.csproj",
+                "--context",
+                "ApplicationDataContext"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "nameOfMigration",
+            "type": "promptString",
+            "description": "name of migration"
         }
     ]
 }

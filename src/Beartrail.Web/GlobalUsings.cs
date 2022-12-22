@@ -1,3 +1,10 @@
 global using Beartrail.Web.Configuration;
 global using Beartrail.Infrastructure.Configuration;
 global using Beartrail.Infrastructure;
+global using Beartrail.Infrastructure.Database;
+global using Beartrail.Application.Interfaces.Database;
+global using Beartrail.Infrastructure.Services;
+global using Beartrail.Application.Interfaces.Jwt;
+global using Beartrail.Application.Common.DataTransfer;
+global using Microsoft.AspNetCore.Mvc;
+global using Beartrail.Web.Endpoints.Auth;

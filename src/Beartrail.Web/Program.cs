@@ -34,9 +34,19 @@ builder.Services.AddAuthentication(options =>
 });
 
 
-
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<IApplicationDataContextSeeder>();
+    await seeder.SeedAsync();
+}
+
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapGet("/", () => "Hello World!");
+app.MapGroup("/auth").MapAuth();
 
 app.Run();
