@@ -34,7 +34,7 @@ public class ApplicationDataContextSeeder : IApplicationDataContextSeeder
         _logger.LogInformation($"[{this.ToString()}] Creating users");
         List<ApplicationContextUserSeederDataTransferObject> users = new() {
             new ApplicationContextUserSeederDataTransferObject{
-                Password = "123456",
+                Password = "Test123456.",
                 RoleName = "Administrator",
                 UserName = "admin@localhost.com",
             }
@@ -60,8 +60,9 @@ public class ApplicationDataContextSeeder : IApplicationDataContextSeeder
                     Email = user.UserName,
                     UserName = user.UserName,
                 };
-                await _userManager.AddPasswordAsync(x, user.Password);
                 await _userManager.CreateAsync(x);
+
+                var passwordHashResult = await _userManager.AddPasswordAsync(x, user.Password);
             }
         }
     }

@@ -1,22 +1,14 @@
 using System.Security.Claims;
-
 namespace Beartrail.Web.Endpoints.Auth;
 
 public static class AuthEndpoint
 {
     public static RouteGroupBuilder MapAuth(this RouteGroupBuilder group)
     {
-        group.MapPost("/login", async ([FromServices] IJwtTokenGeneratorService tokenGenerator, [FromBody] LogInUserDataTransferObject logInUserDataTransfer) =>
+        group.MapPost("/login", async ([FromBody] LoginCommand command, [FromServices] ISender sender) =>
         {
-            var token = await tokenGenerator.GenerateTokenAsync(logInUserDataTransfer);
-            if (string.IsNullOrEmpty(token))
-            {
-                return Results.BadRequest();
-            }
-            return Results.Ok(new
-            {
-                Token = token
-            });
+            var result = await sender.Send(command);
+            return Results.Ok(result);
         }).AllowAnonymous();
         group.MapGet("/", (ClaimsPrincipal user) =>
         {

@@ -16,6 +16,7 @@ public static class StartupInfrastructure
             .AddEntityFrameworkStores<ApplicationDataContext>();
 
         services.AddScoped<IJwtTokenGeneratorService, JwtTokenGeneratorService>();
+        services.AddTransient<IUserSignInManager, UserSignInManager>();
 
         return services;
     }
