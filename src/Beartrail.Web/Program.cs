@@ -1,7 +1,3 @@
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddCustomConfig();
@@ -28,8 +24,8 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = jwtSettings!.Issuer,
-        ValidAudience = jwtSettings!.Audience,
+        ValidIssuers = jwtSettings!.Issuers,
+        ValidAudiences = jwtSettings!.Audiences,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings!.Key))
     };
 });
@@ -39,6 +35,9 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
+    var envParser = scope.ServiceProvider.GetRequiredService<IEnvFileParser>();
+    envParser.ParseDotEnvFile(System.IO.Directory.GetCurrentDirectory());
+
     var seeder = scope.ServiceProvider.GetRequiredService<IApplicationDataContextSeeder>();
     await seeder.SeedAsync();
 }

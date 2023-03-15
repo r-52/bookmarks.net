@@ -11,3 +11,8 @@ global using Microsoft.AspNetCore.Mvc;
 global using Beartrail.Web.Endpoints.Auth;
 global using Beartrail.Application.Mediator.Auth.Commands.Login;
 global using MediatR;
+global using Beartrail.Infrastracture.Services.Env;
+global using System.Text;
+global using Beartrail.Application.Interfaces.Env;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.IdentityModel.Tokens;

@@ -11,9 +11,9 @@ public class JwtSettings
 
     public string Key { get; set; } = string.Empty;
 
-    public string Audience { get; set; } = string.Empty;
+    public IEnumerable<string> Audiences { get; set; }
 
     public int ValidInHours { get; set; }
 
-    public string Issuer { get; set; } = string.Empty;
+    public IEnumerable<string> Issuers { get; set; }
 }

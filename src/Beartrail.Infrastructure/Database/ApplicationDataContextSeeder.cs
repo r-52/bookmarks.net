@@ -1,3 +1,5 @@
+using Beartrail.Infrastracture.Identity;
+
 namespace Beartrail.Infrastructure.Database;
 
 public class ApplicationDataContextSeeder : IApplicationDataContextSeeder
@@ -34,9 +36,9 @@ public class ApplicationDataContextSeeder : IApplicationDataContextSeeder
         _logger.LogInformation($"[{this.ToString()}] Creating users");
         List<ApplicationContextUserSeederDataTransferObject> users = new() {
             new ApplicationContextUserSeederDataTransferObject{
-                Password = "Test123456.",
+                Password = Environment.GetEnvironmentVariable("BEAR__DEFAULT_USER_PASSWD"),
                 RoleName = "Administrator",
-                UserName = "admin@localhost.com",
+                UserName = Environment.GetEnvironmentVariable("BEAR__DEFAULT_USER_EMAIL"),
             }
         };
         await CreateUser(users);
@@ -71,7 +73,7 @@ public class ApplicationDataContextSeeder : IApplicationDataContextSeeder
     {
         foreach (var name in names)
         {
-            var role = new IdentityRole(name);
+            var role = new BearRole(name);
             if (_roleManager.Roles.All(r => r.Name != role.Name))
             {
                 _logger.LogInformation($"[{this.ToString()}] Creating role {name}");

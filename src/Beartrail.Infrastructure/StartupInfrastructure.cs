@@ -15,6 +15,7 @@ public static class StartupInfrastructure
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDataContext>();
 
+        services.AddScoped<IEnvFileParser, EnvFileParser>();
         services.AddScoped<IJwtTokenGeneratorService, JwtTokenGeneratorService>();
         services.AddTransient<IUserSignInManager, UserSignInManager>();
 

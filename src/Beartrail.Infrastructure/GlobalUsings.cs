@@ -18,3 +18,5 @@ global using System.IdentityModel.Tokens.Jwt;
 global using System.Text;
 global using Microsoft.IdentityModel.Tokens;
 global using Beartrail.Application.Interfaces.Auth;
+global using Beartrail.Application.Interfaces.Env;
+global using Beartrail.Infrastracture.Services.Env;
